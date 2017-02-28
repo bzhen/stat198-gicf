@@ -114,7 +114,7 @@ print('Start time: {}'.format(start_time))
 #print("project sentences...")
 #projected_df = project_sentences(cleaned_words_df, dictionary)
 
-#print("encode_dictionary")
+#print("encode_dictionary...")
 #encoding = encode_dictionary(dictionary)
 
 print('Duration: {}\n'.format(datetime.now() - start_time))
