@@ -20,10 +20,10 @@ file_name = "reviews_Cell_Phones_and_Accessories_5.json"
 #################################
 ## Functions
 #################################
-def split_into_sentences(input_file_name, output_file_name=None):
+def split_into_sentences(input_file_name):
     """ split each review into separate sentences """
     tokenizer = PunktSentenceTokenizer()
-    df = pd.read_json(file_name, 'r', lines=True)
+    df = pd.read_json(input_file_name, 'r', lines=True)
     labelled_review = df[['reviewText', 'overall']]
     tokenized_text = labelled_review['reviewText'].apply(lambda x: tokenizer.tokenize(x)) 
 
@@ -99,22 +99,22 @@ def encode_dictionary(dictionary):
 start_time = datetime.now()
 print('Start time: {}'.format(start_time))
 
-#print("split_into_sentences...")
-#tokenized_df = split_into_sentences(file_name)
-#
-#print("clean_data...")
-#cleaned_words_df = clean_data(tokenized_df)
+print("split_into_sentences...")
+tokenized_df = split_into_sentences(file_name)
 
-#print("build_w2v...")
-#w2v = build_w2v(cleaned_words_df)
+print("clean_data...")
+cleaned_words_df = clean_data(tokenized_df)
 
-#print("build_word_dictionary...")
-#with_counts, dictionary = build_word_dictionary(cleaned_words_df)
+print("build_w2v...")
+w2v = build_w2v(cleaned_words_df)
 
-#print("project sentences...")
-#projected_df = project_sentences(cleaned_words_df, dictionary)
+print("build_word_dictionary...")
+with_counts, dictionary = build_word_dictionary(cleaned_words_df)
 
-#print("encode_dictionary...")
-#encoding = encode_dictionary(dictionary)
+print("project sentences...")
+projected_df = project_sentences(cleaned_words_df, dictionary)
+
+print("encode_dictionary...")
+encoding = encode_dictionary(dictionary)
 
 print('Duration: {}\n'.format(datetime.now() - start_time))
